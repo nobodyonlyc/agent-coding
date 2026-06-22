@@ -75,3 +75,23 @@ work   → implement → unit test → fix → repeat until green
 verify → ./harness verify <id>   (must pass before moving on)
 stop   → ./harness session stop → ./harness clean → commit
 ```
+
+## Gates
+
+Discipline is enforced mechanically by hooks in `.harness/skills-src/hooks/`, wired into
+`.claude/settings.json`. They run on the agent's `harness` commands and block when evidence is
+missing or incomplete (`--override-snapshot` bypasses the verify-time gates).
+
+| When | Gate | Blocks unless… |
+|---|---|---|
+| `harness start <id>` | `phase-guard` | `docs/design-docs/<id>/plan.md` exists and is filled (not a template). |
+| `harness verify <id>` | `quality-gate` | evidence has a `## Test` and a `## Review` section. |
+| `harness verify <id>` | `stack-decision-gate` | if `docs/design/architecture.md` exists, it carries a machine-readable `## Stack` block (language + pinned **latest-LTS** version + research marker). |
+| `harness verify <id>` | `test-type-coverage-gate` | every recorded `<type>:` test verdict reads **PASS**. |
+| `harness verify <id>` | `it-testcase-gate` | when integration is selected, evidence has a test-case table (Steps + Expected Output). |
+| `harness verify <id>` | `e2e-coverage-gate` | when e2e is selected, evidence has an E2E coverage matrix with **every flow covered**. |
+| `harness verify <id>` | `review-gate` / `review-fix-gate` | the `## Review` section is substantive and review findings are resolved. |
+| `git push --force` | `git-guard` | never force-pushes `main`/`master`. |
+
+A detailed engineering review of the system lives in
+[`agent-evaluation-report.html`](agent-evaluation-report.html).
