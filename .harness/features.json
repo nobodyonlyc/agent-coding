@@ -241,6 +241,18 @@
       "notes": "verified 2026-06-22T11:20:26.247170+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F22",
+      "priority": 2,
+      "area": "dev",
+      "title": "Language dev skills: js-ts, python, go, rust (+ rust convention)",
+      "user_visible_behavior": "Language-specific dev skills exist for js-ts/python/go/rust, each linking its convention and composing with the component dev-* skills; rust convention added.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in dev-js-ts dev-python dev-go dev-rust; do test -f skills/$s/SKILL.md || exit 1; done && test -f resources/conventions/rust.md && grep -q conventions/rust.md skills/dev-rust/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T13:23:22.854352+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F09",
       "priority": 3,
       "area": "delivery",
