@@ -301,6 +301,54 @@
       "notes": "verified 2026-06-22T15:17:17.736828+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F39",
+      "priority": 1,
+      "area": "dev",
+      "title": "Expert-skill bridge infra + vendor python-pro (proof)",
+      "user_visible_behavior": "resources/expert-skills-map.md registry + scripts/lint-expert-map.sh + provenance manifest + attribution exist; python-pro vendored as a first-class skill and dev-python delegates to it; lint-expert-map + validate pass.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/python-pro/SKILL.md && test -f resources/expert-skills-map.md && test -x scripts/lint-expert-map.sh && grep -qi python-pro skills/dev-python/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F40",
+      "priority": 1,
+      "area": "dev",
+      "title": "Vendor language-pro experts + wire harness language skills",
+      "user_visible_behavior": "11 remaining language experts vendored (typescript/javascript/golang/rust/java/cpp/csharp/kotlin/swift/php/sql); dev-js-ts/dev-go/dev-rust delegate to their experts; all 12 in the map; lint-expert-map + validate pass.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in typescript-pro javascript-pro golang-pro rust-engineer java-architect cpp-pro csharp-developer kotlin-specialist swift-expert php-pro sql-pro; do test -f skills/$s/SKILL.md || exit 1; done && grep -qi typescript-pro skills/dev-js-ts/SKILL.md && grep -qi golang-pro skills/dev-go/SKILL.md && grep -qi rust-engineer skills/dev-rust/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F41",
+      "priority": 1,
+      "area": "dev",
+      "title": "Vendor web-framework experts + wire dev-fe/dev-be",
+      "user_visible_behavior": "15 web framework experts vendored (react/react-native/angular/vue/vue-js/nextjs/django/fastapi/spring-boot/rails/laravel/nestjs/dotnet-core/flutter/frontend-design); dev-fe and dev-be point to the expert map per stack; lint-expert-map + validate pass.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in react-expert react-native-expert angular-architect vue-expert vue-expert-js nextjs-developer django-expert fastapi-expert spring-boot-engineer rails-expert laravel-specialist nestjs-expert dotnet-core-expert flutter-expert frontend-design; do test -f skills/$s/SKILL.md || exit 1; done && grep -qi expert-skills-map skills/dev-fe/SKILL.md && grep -qi expert-skills-map skills/dev-be/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F42",
+      "priority": 1,
+      "area": "quality",
+      "title": "Vendor test/design/debug experts + wire test/design/bugfix/review",
+      "user_visible_behavior": "9 test/design/debug experts vendored (test-master/playwright/tdd-workflow/webapp-testing/api-designer/architecture-designer/code-reviewer/debugging-wizard/debug-diagnose); test-*, design-api, design-architecture, workflow-bugfix, check-code-review delegate via the map; lint-expert-map + validate pass.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in test-master playwright-expert tdd-workflow webapp-testing api-designer architecture-designer code-reviewer debugging-wizard debug-diagnose; do test -f skills/$s/SKILL.md || exit 1; done && grep -qi expert-skills-map skills/design-api/SKILL.md && grep -qi expert-skills-map skills/workflow-bugfix/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
