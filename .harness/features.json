@@ -270,11 +270,11 @@
       "area": "design",
       "title": "Deep: design skills (database/api/detailed/ui/ux-flow)",
       "user_visible_behavior": "design-database, design-api, design-detailed, design-ui, design-ux-flow meet the depth bar (output contracts/examples) and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in design-database design-api design-detailed design-ui design-ux-flow; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:59:05.952148+07:00: 1/1 cmds OK"
     },
     {
       "id": "F35",
