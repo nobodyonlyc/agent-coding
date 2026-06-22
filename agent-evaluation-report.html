@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent &amp; Harness Evaluation — agent-coding</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1d212b; --ink:#e7ebf0; --mut:#9aa4b2;
+    --line:#2a2f3a; --acc:#5aa9ff; --good:#3fb950; --warn:#d29922; --bad:#f85149;
+    --chip:#222834;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,#1a2030,#141821);padding:28px 30px;margin-bottom:28px}
+  h1{margin:0 0 6px;font-size:27px;letter-spacing:.2px}
+  h2{margin:38px 0 14px;font-size:20px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  h3{margin:24px 0 8px;font-size:16px;color:#cdd6e2}
+  .sub{color:var(--mut);font-size:14px}
+  .grid{display:grid;gap:14px}
+  .g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.g4,.g3,.g2{grid-template-columns:1fr 1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .n{font-size:26px;font-weight:700} .kpi .l{color:var(--mut);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
+  .verdict{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .score{font-size:46px;font-weight:800;line-height:1}
+  .badge{display:inline-block;padding:3px 11px;border-radius:999px;font-size:12.5px;font-weight:600;border:1px solid var(--line);background:var(--chip)}
+  .b-good{color:var(--good);border-color:#1f7a32}.b-warn{color:var(--warn);border-color:#8a6411}.b-bad{color:var(--bad);border-color:#9e2b25}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:#c4cdda;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px;background:var(--panel2)}
+  tr:hover td{background:#161a22}
+  code,kbd{background:#11151c;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px}
+  pre{background:#0c0f14;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto;font-size:12.7px;line-height:1.5}
+  .pill{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}
+  .pass{background:#10301a;color:#74e08a} .fail{background:#3a1513;color:#ff8d84} .na{background:#23272f;color:#9aa4b2}
+  .sev-h{color:var(--bad);font-weight:700}.sev-m{color:var(--warn);font-weight:700}.sev-l{color:#7fb3ff;font-weight:700}
+  .bar{height:9px;border-radius:6px;background:#222834;overflow:hidden;margin-top:6px}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,#3fb950,#5aa9ff)}
+  ul{margin:8px 0 8px 2px;padding-left:20px} li{margin:5px 0}
+  .muted{color:var(--mut)} .tag{color:var(--acc)}
+  footer{margin-top:50px;color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:760px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="verdict">
+    <div>
+      <h1>AI Agent &amp; Harness Engineering Evaluation</h1>
+      <div class="sub">Target: <b>agent-coding</b> — a scaffolding platform for long-running agent work
+      (harness CLI + <code>harness-skills</code> submodule). Branch <code>master</code> @ <code>ee20d30</code>.</div>
+    </div>
+  </div>
+  <div class="verdict" style="margin-top:18px">
+    <div class="score" style="color:var(--good)">8.3<span style="font-size:20px;color:var(--mut)">/10</span></div>
+    <div>
+      <span class="badge b-good">Verdict: Strong / production-leaning</span>
+      <span class="badge b-good">F1 &amp; F2 resolved post-review</span>
+      <div class="sub" style="margin-top:8px">Evaluated 2026-06-22 · 82 skills, 16 hooks, 36 vendored experts, 45 backlog features (all passing).
+      Method: static integrity audit + behavioral gate testing with positive/negative fixtures.</div>
+    </div>
+  </div>
+</header>
+
+<section class="grid g4">
+  <div class="card kpi"><div class="n">82</div><div class="l">Skills</div></div>
+  <div class="card kpi"><div class="n">16</div><div class="l">Hooks / gates</div></div>
+  <div class="card kpi"><div class="n">36</div><div class="l">Vendored experts</div></div>
+  <div class="card kpi"><div class="n">45</div><div class="l">Features · 100% passing</div></div>
+</section>
+<section class="grid g4" style="margin-top:14px">
+  <div class="card kpi"><div class="n">7,384</div><div class="l">Lines of skill content</div></div>
+  <div class="card kpi"><div class="n">12</div><div class="l">Hard rules (AGENTS.md)</div></div>
+  <div class="card kpi"><div class="n">65 / 0</div><div class="l">Resource links · broken</div></div>
+  <div class="card kpi"><div class="n">0</div><div class="l">Frontmatter defects</div></div>
+</section>
+
+<h2>1 · Executive summary</h2>
+<p>This is a <b>mature, well-architected agent harness</b>, not a prompt collection. Its defining idea is a clean
+separation between a thin <i>orchestration spine</i> (workflow / plan / dev / test / check / ship skills that own
+<i>what</i> to do and the gates) and <b>36 vendored MIT expert skills</b> that supply per-language / per-framework craft.
+Process discipline is enforced mechanically through three layers: an <b>SQLite-backed backlog</b> (WIP=1, immutable
+verification commands), <b>proximity docs</b> (per-feature <code>plan.md</code> + <code>evidence.md</code>), and a
+<b>16-hook gate chain</b> wired into the agent runtime (<code>PreToolUse</code>/<code>Stop</code>/<code>SessionStart</code>).</p>
+<p>All static-integrity and behavioral tests passed: the validator is green, every skill has valid frontmatter, all 65
+resource links resolve, the hook wiring is exactly consistent (16 wired = 16 on disk, zero orphans/dangling), and the
+gate chain blocks every malformed fixture while allowing every well-formed one and every negative control. The main
+deductions are <b>operational</b>: the <code>harness</code> binary is not in the repo (the whole flow is inert until
+installed), a <b>stale duplicate <code>hooks/</code> tree</b> at repo root invites drift, and the evidence gates
+verify the <i>record</i> rather than re-executing tests — a deliberate boundary that should be understood.</p>
+
+<h2>2 · Architecture overview</h2>
+<div class="two">
+  <div class="card">
+    <h3 style="margin-top:0">Layers</h3>
+    <ul>
+      <li><b>Harness CLI</b> — backlog state (SQLite ↔ <code>features.json</code>), WIP=1, <code>verify</code> runs immutable commands, session lifecycle.</li>
+      <li><b>Orchestration spine</b> — <span class="tag">workflow-*</span> (5), <span class="tag">plan-*</span> (4), <span class="tag">dev-*</span> (9), <span class="tag">test-*</span> (7), <span class="tag">check-*</span> (7), <span class="tag">design-*</span> (6), <span class="tag">ship-*</span> (4), <span class="tag">core-*</span> (4), <span class="tag">opt-*</span>.</li>
+      <li><b>Expert bridge</b> — <code>expert-skills-map.md</code> delegates craft to 36 vendored experts (python-pro, react-expert, playwright-expert, test-master, …).</li>
+      <li><b>Resources</b> — shared conventions (persona-mode, autonomy-mode, token-budget, step-gate, task-state) + language convention files.</li>
+      <li><b>Gate layer</b> — 16 hooks enforcing phase, quality, review, test rigor, persona, context budget, git safety.</li>
+      <li><b>Token optimization</b> — <code>caveman</code> nested submodule (v1.9.0) as a standing rule.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Lifecycle (enforced)</h3>
+<pre>resume → start(plan-gated) → work
+   → unit → fix → repeat
+   → verify(evidence-gated) → stop
+
+WIP = 1            (single in_progress)
+verifications      frozen at start (anti-bias)
+evidence.md        required for verify
+review + test      hard gates before passing</pre>
+    <div class="sub">The gate chain makes these rules non-bypassable from inside the agent loop:
+    <code>start</code> is blocked by an unfilled plan; <code>verify</code> is blocked by missing/sparse
+    evidence, a non-green test verdict, a missing IT test-case table, or an uncovered UI flow.</div>
+  </div>
+</div>
+
+<h2>3 · Methodology</h2>
+<p>Two complementary passes, all read-only / sandboxed:</p>
+<ul>
+  <li><b>Static integrity</b> — run <code>scripts/validate.sh</code> and <code>lint-expert-map.sh</code>; verify every
+  <code>SKILL.md</code> frontmatter; resolve all <code>../X/SKILL.md</code> and <code>../../resources/*.md</code> links from
+  each skill's own directory; reconcile hooks wired in <code>settings.json</code> against hooks on disk; <code>bash -n</code> all hooks.</li>
+  <li><b>Behavioral gate testing</b> — drive each verify-time gate with crafted <code>evidence.md</code> fixtures
+  (one well-formed, several malformed) plus negative-control commands, asserting allow(0)/block(1); then a
+  <b>regression sweep</b> running the new always-on gate against all 45 existing features to detect false positives.</li>
+</ul>
+
+<h2>4 · Static integrity results</h2>
+<table>
+  <tr><th>Check</th><th>Scope</th><th>Result</th><th>Detail</th></tr>
+  <tr><td>Structure validator</td><td><code>validate.sh</code></td><td><span class="pill pass">PASS</span></td><td>Required files present, skills have frontmatter, hooks syntactically valid.</td></tr>
+  <tr><td>Expert-map lint</td><td><code>lint-expert-map.sh</code></td><td><span class="pill pass">PASS</span></td><td>36 experts vendored and mapped.</td></tr>
+  <tr><td>Frontmatter (name/description)</td><td>82 skills</td><td><span class="pill pass">0 defects</span></td><td>Every skill exposes <code>name:</code> + <code>description:</code>.</td></tr>
+  <tr><td>Internal skill links</td><td>all <code>../X/SKILL.md</code></td><td><span class="pill pass">0 broken</span></td><td>Cross-references resolve.</td></tr>
+  <tr><td>Resource links</td><td>65 references</td><td><span class="pill pass">0 broken</span></td><td>Resolved from each skill's own directory.</td></tr>
+  <tr><td>Hook syntax</td><td>16 hooks</td><td><span class="pill pass">0 errors</span></td><td><code>bash -n</code> clean on all.</td></tr>
+  <tr><td>Hook wiring consistency</td><td>settings ↔ disk</td><td><span class="pill pass">EXACT</span></td><td>16 wired = 16 on disk; 0 orphaned, 0 dangling.</td></tr>
+  <tr><td>Nested submodule</td><td><code>vendor/caveman</code></td><td><span class="pill pass">v1.9.0</span></td><td>Checked out and referenced by <code>opt-caveman</code>.</td></tr>
+</table>
+
+<h2>5 · Behavioral gate testing</h2>
+<p>Each verify-time gate was driven with evidence fixtures. <b>Expected = Actual on every case</b>.</p>
+<table>
+  <tr><th>Fixture</th><th>Gate exercised</th><th>Expected</th><th>Actual</th><th></th></tr>
+  <tr><td>Well-formed evidence (UT/IT table/E2E matrix/Review)</td><td>quality, review, test-type, it-testcase, e2e-coverage</td><td>allow ×5</td><td>allow ×5</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>IT recorded, no test-case table</td><td>it-testcase-gate</td><td>block</td><td>block</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>E2E matrix with a <code>MISSING</code> flow</td><td>e2e-coverage-gate</td><td>block</td><td>block</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>Recorded <code>unit: FAIL</code> verdict</td><td>test-type-coverage-gate</td><td>block</td><td>block</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td><code>## Review</code> = placeholder</td><td>review-gate</td><td>block</td><td>block</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>Plan still a template</td><td>phase-guard (on <code>start</code>)</td><td>block</td><td>block</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>Force-push to master</td><td>git-guard</td><td>block</td><td>block</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>Non-verify command (<code>ls -la</code>)</td><td>5 gates (negative control)</td><td>allow ×5</td><td>allow ×5</td><td><span class="pill pass">OK</span></td></tr>
+  <tr><td>Regression: all 45 existing features</td><td>test-type / it / e2e gates</td><td>0 false positives</td><td>0 tripped</td><td><span class="pill pass">OK</span></td></tr>
+</table>
+<p class="sub">The gates "fail open" when a tier is not selected (no formal <code>- type:</code> verdict line), which is why
+legacy prose-only evidence is never tripped — confirmed empirically against the whole backlog.</p>
+
+<h2>6 · Dimension scorecard</h2>
+<table>
+  <tr><th>Dimension</th><th>Score</th><th>Rationale</th></tr>
+  <tr><td>Architecture &amp; separation of concerns</td><td><b>9</b><div class="bar"><i style="width:90%"></i></div></td><td>Clean spine-vs-expert split; gates own enforcement, experts own craft. Highly extensible.</td></tr>
+  <tr><td>Skill breadth &amp; coverage</td><td><b>9</b><div class="bar"><i style="width:90%"></i></div></td><td>82 skills spanning intake→plan→design→dev→test→review→ship across many stacks.</td></tr>
+  <tr><td>Enforcement / gate design</td><td><b>8</b><div class="bar"><i style="width:80%"></i></div></td><td>Layered, deterministic, well-targeted; minor edge (unit not forced to exist).</td></tr>
+  <tr><td>Robustness / integrity</td><td><b>8</b><div class="bar"><i style="width:80%"></i></div></td><td>No broken links/frontmatter; gates regression-safe; pure-bash, dependency-light.</td></tr>
+  <tr><td>Documentation &amp; conventions</td><td><b>8</b><div class="bar"><i style="width:80%"></i></div></td><td>AGENTS.md/CLAUDE.md, per-feature plan/evidence, expert map. Some duplication.</td></tr>
+  <tr><td>Maintainability</td><td><b>8</b><div class="bar"><i style="width:80%"></i></div></td><td>Submodule + install.sh wiring is idempotent; skills are small and composable.</td></tr>
+  <tr><td>Operability / reproducibility</td><td><b>7</b><div class="bar"><i style="width:70%"></i></div></td><td>Binary install path is documented and works (GitHub Releases per platform); now installed and driving the backlog. Still no CI; <code>init.sh</code> only warns rather than auto-installing.</td></tr>
+</table>
+
+<h2>7 · Strengths</h2>
+<ul>
+  <li><b>Mechanically enforced process.</b> WIP=1, plan-before-start, evidence-before-verify, and review/test hard gates are implemented as runtime hooks — not advice an agent can quietly skip.</li>
+  <li><b>Anti-self-evaluation design.</b> Verification commands are frozen at <code>start</code>; evidence requires both a <code>## Test</code> and an independent <code>## Review</code> section, mitigating "grade your own homework" bias.</li>
+  <li><b>Spine + expert bridge.</b> The orchestration skills stay thin and stack-agnostic while 36 MIT experts carry idioms — easy to add a language without touching the workflow logic.</li>
+  <li><b>Test rigor is now first-class.</b> IT requires concrete test-case tables (steps + expected output); UI E2E requires a full-coverage matrix; non-green verdicts block verify (feature F45).</li>
+  <li><b>Clean engineering hygiene.</b> Zero broken links, exact hook wiring, idempotent installer, token-budget discipline via caveman.</li>
+</ul>
+
+<h2>8 · Findings &amp; risks</h2>
+<table>
+  <tr><th>#</th><th>Sev</th><th>Finding</th><th>Impact</th></tr>
+  <tr><td>F1</td><td class="sev-l">RESOLVED</td><td><b>Harness binary not in the repo</b> (by design — <code>.gitignore</code>d). The CLI ships from a separate Rust repo <code>nobodyonlyc/harness</code> whose <code>install-harness.sh</code> downloads a per-platform binary from GitHub Releases. <b>Now installed</b>: <code>harness-linux-x86_64</code> v0.1.0, DB built from the existing <code>features.json</code> via <code>init --bare</code> (<code>sync_in</code>, JSON→DB; backlog untouched).</td><td>Resolved for this host: <code>harness report</code> runs (45/45 passing). Residual: <code>init.sh</code> still only warns when the binary is absent — could fail loudly and auto-invoke the documented installer.</td></tr>
+  <tr><td>F2</td><td class="sev-l">RESOLVED</td><td><b>Stale duplicate <code>hooks/</code> at repo root</b> (7 legacy default hooks) diverged from the canonical <code>.harness/skills-src/hooks/</code> (16). <b>Removed</b> via <code>git rm</code>; README layout updated to point at the canonical path.</td><td>Single source of truth restored; live <code>settings.json</code> already referenced only the canonical set, so no wiring change was needed.</td></tr>
+  <tr><td>F3</td><td class="sev-m">MED</td><td><b>Gates verify the record, not execution.</b> The hooks enforce that evidence is well-formed and self-reports PASS; they do not re-run tests. Real execution is the binary's <code>verification</code> array.</td><td>An agent could, in principle, write a PASS table without running tests. Gates raise the cost of dishonesty but do not eliminate it.</td></tr>
+  <tr><td>F4</td><td class="sev-l">LOW</td><td><b><code>test-type-coverage-gate</code> does not require a <code>unit:</code> line to exist</b> (deliberate, to avoid false positives on docs/infra features).</td><td>A code task could omit unit tests entirely and still pass the gate; "unit always required" lives only in skill prose.</td></tr>
+  <tr><td>F5</td><td class="sev-l">LOW</td><td><b>No CI / automated regression of the gates themselves.</b> Validator + lints exist but are run manually.</td><td>A future hook edit could regress silently; gate behavior is only as safe as the last manual run.</td></tr>
+  <tr><td>F6</td><td class="sev-l">LOW</td><td><b>Some documentation duplication</b> (gate rules restated across skills and hook headers).</td><td>Maintenance drift risk as formats evolve.</td></tr>
+</table>
+
+<h2>9 · Recommendations (prioritized)</h2>
+<ul>
+  <li><b>P1 — Make the loop reproducible.</b> <span class="badge b-good">partly done</span> Binary now installed from GitHub Releases. Remaining: have <code>init.sh</code> auto-invoke <code>install-harness.sh</code> (or fail loudly) when <code>./harness</code> is missing, so a fresh clone runs <code>start/verify</code> out of the box.</li>
+  <li><b>P1 — Remove the root <code>hooks/</code> tree.</b> <span class="badge b-good">done</span> Deleted; README updated to point at <code>.harness/skills-src/hooks/</code> as the single source of truth.</li>
+  <li><b>P2 — Add a CI job</b> running <code>validate.sh</code>, the lints, and a checked-in version of the gate fixture matrix on every push to <code>harness-skills</code>.</li>
+  <li><b>P2 — Tie the gates to selection, not just the record.</b> Have <code>check-test-strategy</code> emit the selected tiers into the feature/evidence machine-readably, then let the gate assert that <i>every selected tier</i> appears and passes (closes F4: enforce "unit required" for code tasks).</li>
+  <li><b>P3 — Optionally cross-check execution.</b> Where cheap, have <code>harness verify</code> stamp a signed/structured test result into evidence that the gate reads, narrowing the fabrication gap (F3).</li>
+  <li><b>P3 — Centralize gate-format docs</b> into one canonical reference linked by both skills and hooks.</li>
+</ul>
+
+<h2>10 · Appendix — evidence of testing</h2>
+<pre>$ bash scripts/validate.sh            → == validate: PASS ==
+$ bash scripts/lint-expert-map.sh     → lint-expert-map: PASS (36 experts vendored)
+frontmatter defects (82 skills)       → 0
+internal skill links broken           → 0
+resource links checked / broken       → 65 / 0
+bash -n on 16 hooks                    → 0 syntax errors
+hook wiring (settings ↔ disk)         → 16 = 16, orphans 0, dangling 0
+
+Gate matrix (allow=0 / block=1):
+  well-formed  · quality/review/test-type/it/e2e        → 0,0,0,0,0   (expected allow)
+  IT no table  · it-testcase-gate                        → 1           (expected block)
+  E2E MISSING  · e2e-coverage-gate                        → 1           (expected block)
+  unit:FAIL    · test-type-coverage-gate                  → 1           (expected block)
+  review=TODO  · review-gate                              → 1           (expected block)
+  plan tmpl    · phase-guard (start)                      → 1           (expected block)
+  force-push   · git-guard                                → 1           (expected block)
+  ls -la       · 5 gates negative control                 → 0×5         (expected allow)
+  regression   · 3 gates × 45 features                    → 0 tripped   (no false positives)
+
+Post-review remediation:
+  binary       · curl Releases harness-linux-x86_64 v0.1.0 → 4.2MB x86-64 ELF, installed ./harness
+  init --bare  · sync_in builds DB from features.json       → features.json byte-identical (45 features)
+  harness report                                            → 45/45 passing, evidence 45/45
+  root hooks/  · git rm (7 legacy files)                    → removed; README repointed</pre>
+
+<footer>
+  Evaluation performed by an AI agent acting as an AI-Agent &amp; harness-engineering reviewer.
+  Read-only static audit + sandboxed behavioral testing; no production state mutated.
+  Scope: <code>agent-coding</code> @ <code>master</code> / <code>ee20d30</code>, <code>harness-skills</code> @ <code>8ccec39</code>.
+  Generated 2026-06-22.
+</footer>
+
+</div>
+</body>
+</html>
