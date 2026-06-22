@@ -193,6 +193,18 @@
       "notes": "verified 2026-06-22T13:49:53.019143+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F25",
+      "priority": 1,
+      "area": "quality",
+      "title": "Review-fix loop: independent reviewer + tracked findings + fix/re-review + gate",
+      "user_visible_behavior": "check-review-loop runs an independent (adversarial) reviewer, records findings as a tracked checklist in evidence ## Review, drives a fix->re-review loop (capped+escalate), and a hard review-fix-gate hook blocks verify while any finding stays open.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/check-review-loop/SKILL.md && test -f hooks/review-fix-gate.sh && bash -n hooks/review-fix-gate.sh && grep -qiE \"independent|subagent\" skills/check-review-loop/SKILL.md && grep -q review-fix-gate config-templates/claude.settings.json && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T13:56:01.054703+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
