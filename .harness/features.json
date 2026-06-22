@@ -426,11 +426,11 @@
       "area": "dev",
       "title": "Deep: component dev skills (be/fe/cli/db/batch)",
       "user_visible_behavior": "dev-be, dev-fe, dev-cli, dev-db, dev-batch meet the depth bar (Bad/Good examples) and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in dev-be dev-fe dev-cli dev-db dev-batch; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:10:34.749388+07:00: 1/1 cmds OK"
     },
     {
       "id": "F09",
