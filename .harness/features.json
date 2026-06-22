@@ -306,11 +306,11 @@
       "area": "dev",
       "title": "Expert-skill bridge infra + vendor python-pro (proof)",
       "user_visible_behavior": "resources/expert-skills-map.md registry + scripts/lint-expert-map.sh + provenance manifest + attribution exist; python-pro vendored as a first-class skill and dev-python delegates to it; lint-expert-map + validate pass.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && test -f skills/python-pro/SKILL.md && test -f resources/expert-skills-map.md && test -x scripts/lint-expert-map.sh && grep -qi python-pro skills/dev-python/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:38:15.277183+07:00: 1/1 cmds OK"
     },
     {
       "id": "F40",
