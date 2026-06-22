@@ -36,6 +36,18 @@
           },
           {
             "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/test-type-coverage-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/it-testcase-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/e2e-coverage-gate.sh\""
+          },
+          {
+            "type": "command",
             "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/review-gate.sh\""
           },
           {
