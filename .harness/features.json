@@ -462,11 +462,11 @@
       "area": "core",
       "title": "Light: triggers+One-Liner for mechanical skills (dev-langs/ship-commit/pr/core/opt/skeleton)",
       "user_visible_behavior": "Mechanical skills get a Use-when trigger + One-Liner (not full bar): dev-js-ts/python/go/rust, ship-commit-msg, ship-pr-create, core-explore/explain/fix/file-ops, opt-caveman, plan-skeleton.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in dev-js-ts dev-python dev-go dev-rust ship-commit-msg ship-pr-create core-explore core-explain core-fix core-file-ops opt-caveman plan-skeleton; do grep -qiE \"^description:.*use when\" skills/$s/SKILL.md && grep -qiE \"one[- ]?liner\" skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:21:07.088586+07:00: 1/1 cmds OK"
     }
   ]
 }
