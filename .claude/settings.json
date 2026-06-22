@@ -1,0 +1,59 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(cat *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(./harness *)",
+      "Bash(harness *)",
+      "AskUserQuestion"
+    ],
+    "defaultMode": "dontAsk"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/git-guard.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/phase-guard.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/quality-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/review-gate.sh\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/context-budget-guard.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/session-guard.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/notify.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

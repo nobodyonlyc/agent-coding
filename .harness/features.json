@@ -1,0 +1,256 @@
+{
+  "project": "harness-project",
+  "rules": {
+    "do_not_skip_verification": true,
+    "passing_requires_evidence": true,
+    "single_active_feature": true
+  },
+  "status_legend": {
+    "blocked": "Work cannot continue until a documented blocker is resolved.",
+    "in_progress": "The feature is the current active task.",
+    "not_started": "Work has not begun.",
+    "passing": "Required verification has passed and evidence is recorded."
+  },
+  "features": [
+    {
+      "id": "F01",
+      "priority": 1,
+      "area": "infra",
+      "title": "Scaffold harness-skills repo + submodule + validator",
+      "user_visible_behavior": "harness-skills exists as submodule at .harness/skills-src with README, CATEGORIES.md, install.sh, scripts/validate.sh and caveman vendored via .gitmodules; validator passes.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f README.md && test -f CATEGORIES.md && test -x install.sh && test -x scripts/validate.sh && test -d vendor/caveman && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T10:45:51.372886+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F02",
+      "priority": 1,
+      "area": "resources",
+      "title": "Core resources: mapping, autonomy, persona, token-budget, step-gate",
+      "user_visible_behavior": "resources/ has agent-tool-mapping, autonomy-mode, persona-mode (dev vs non-tech), token-budget (caveman+compaction), step-gate; validator passes.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for f in resources/agent-tool-mapping.md resources/autonomy-mode.md resources/persona-mode.md resources/token-budget.md resources/step-gate.md; do test -f \"$f\" || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T10:51:10.427883+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F03",
+      "priority": 1,
+      "area": "workflows",
+      "title": "workflow-intake: classify request + set persona/mode/collab",
+      "user_visible_behavior": "skills/workflow-intake classifies into 4 routes, sets user_role + autonomy + solo/team, dispatches.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/workflow-intake/SKILL.md && grep -qi persona skills/workflow-intake/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T10:53:41.685360+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F04",
+      "priority": 1,
+      "area": "workflows",
+      "title": "workflow-bootstrap: create project from a prompt",
+      "user_visible_behavior": "workflow-bootstrap drives a greenfield prompt through the full lifecycle (BA->system design->UI->plan tasks->code->review->test(multi)->fixbug->deploy), step-gated and persona-aware.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/workflow-bootstrap/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T10:54:57.107507+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F07",
+      "priority": 1,
+      "area": "analysis",
+      "title": "Phase 1 BA: plan-ba-analysis + plan-us-backlog (persona-aware)",
+      "user_visible_behavior": "BA skills elicit requirements and produce a US backlog; behavior branches on user_role (non-tech=requirement-level, dev=exhaustive acceptance/edge/NFR).",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/plan-ba-analysis/SKILL.md && test -f skills/plan-us-backlog/SKILL.md && grep -qi persona skills/plan-ba-analysis/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:00:07.492448+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F08",
+      "priority": 1,
+      "area": "quality",
+      "title": "Phase 6 Review: code-review + pr-review + refactor (hard gate)",
+      "user_visible_behavior": "Review skills produce real findings recorded to evidence ## Review; gate blocks verify on placeholders.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in check-code-review check-pr-review check-refactor; do test -f skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:09:58.233222+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F11",
+      "priority": 1,
+      "area": "infra",
+      "title": "Multi-agent projection in install.sh (claude/antigravity/codex)",
+      "user_visible_behavior": "install.sh symlinks .claude/skills, generates .agent/workflows/harness-*, leaves codex path-based.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -q .claude/skills install.sh && grep -q .agent/workflows install.sh && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:35:32.113755+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F12",
+      "priority": 1,
+      "area": "infra",
+      "title": "Hooks layer + config-templates + per-agent hook wiring",
+      "user_visible_behavior": "hooks/ holds all gate scripts incl persona-gate/step-gate/caveman-budget; config-templates wire them per agent; bash -n clean.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -d hooks && test -d config-templates && for h in hooks/*.sh; do bash -n \"$h\" || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:39:30.881191+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F13",
+      "priority": 1,
+      "area": "design",
+      "title": "Phase 2 System Design: architecture + database + api + detailed",
+      "user_visible_behavior": "System design skills cover architecture, DB schema, API contracts and detailed/component design with design patterns.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in design-architecture design-database design-api design-detailed; do test -f skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:01:04.970021+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F15",
+      "priority": 1,
+      "area": "planning",
+      "title": "Phase 4 Plan Tasks: plan-tasks + plan-skeleton (chốt test-strategy)",
+      "user_visible_behavior": "Splits a US into child-tasks F<id>-T<n>, scaffolds skeleton, and freezes the per-task test-strategy into immutable verifications before start.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/plan-tasks/SKILL.md && test -f skills/plan-skeleton/SKILL.md && grep -qi test-strategy skills/plan-tasks/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:03:16.864083+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F16",
+      "priority": 1,
+      "area": "dev",
+      "title": "Phase 5 Code: dev-be/fe/cli/db/batch + language conventions",
+      "user_visible_behavior": "Per-component developer skills implement code following language conventions.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in dev-be dev-fe dev-cli dev-db dev-batch; do test -f skills/$s/SKILL.md || exit 1; done && test -d resources/conventions && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:07:04.432862+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F17",
+      "priority": 1,
+      "area": "test",
+      "title": "Phase 7 Test core: check-test-strategy + test-unit + test-integration",
+      "user_visible_behavior": "test-strategy selects required test types from system requirements; UT always, IT when cross-component. Selection recorded into the task's verifications.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/check-test-strategy/SKILL.md && test -f skills/test-unit/SKILL.md && test -f skills/test-integration/SKILL.md && grep -qiE \"regression|e2e|performance|security\" skills/check-test-strategy/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:16:22.425008+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F05",
+      "priority": 2,
+      "area": "workflows",
+      "title": "workflow-feature + workflow-bugfix: continue existing project",
+      "user_visible_behavior": "workflow-feature/bugfix execute a US/bug on an existing harness project through the same gated phase chain (BA delta->design->plan->code->review->test->fix->ship).",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/workflow-feature/SKILL.md && test -f skills/workflow-bugfix/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T10:56:13.512237+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F06",
+      "priority": 2,
+      "area": "workflows",
+      "title": "workflow-team: solo vs teamwork coordination",
+      "user_visible_behavior": "skills/workflow-team covers claim/branch/PR gate; solo and team paths documented.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/workflow-team/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T10:57:20.737818+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F10",
+      "priority": 2,
+      "area": "optimization",
+      "title": "opt-caveman + token-budget wiring",
+      "user_visible_behavior": "opt-caveman skill activates vendored caveman for inter-agent prompts per token-budget policy.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/opt-caveman/SKILL.md && grep -qi caveman resources/token-budget.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:43:13.103557+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F14",
+      "priority": 2,
+      "area": "design",
+      "title": "Phase 3 UI Design: design-ui + design-ux-flow",
+      "user_visible_behavior": "UI skills produce mockups (generate-image, HTML/CSS fallback) and screen/UX flows.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/design-ui/SKILL.md && test -f skills/design-ux-flow/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:02:06.446301+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F18",
+      "priority": 2,
+      "area": "test",
+      "title": "Phase 7 Test extended: regression + e2e + performance + security",
+      "user_visible_behavior": "Conditional test-type skills activate per strategy: regression (touches existing behavior), e2e (user flow), performance (NFR), security (auth/data/external).",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in test-regression test-e2e test-performance test-security; do test -f skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:18:04.969555+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F19",
+      "priority": 2,
+      "area": "quality",
+      "title": "Phase 8 Fixbug: check-qa + bugfix loop-to-green",
+      "user_visible_behavior": "QA skill drives a reproduce->fix->re-verify loop until all selected tests pass.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/check-qa/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:20:26.247170+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F09",
+      "priority": 3,
+      "area": "delivery",
+      "title": "Phase 9 Deploy: commit + pr + release + deploy (deploy=always-stop)",
+      "user_visible_behavior": "Delivery skills handle commit msg, PR, release and deploy; deploy is an always-stop confirmation step.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in ship-commit-msg ship-pr-create ship-release ship-deploy; do test -f skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:21:31.414249+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F20",
+      "priority": 3,
+      "area": "core",
+      "title": "Core skills: explore + explain + fix + file-ops",
+      "user_visible_behavior": "Everyday single-agent skills for exploring, explaining, quick fixes and file ops.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in core-explore core-explain core-fix core-file-ops; do test -f skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:44:07.664409+07:00: 1/1 cmds OK"
+    }
+  ]
+}
