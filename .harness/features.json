@@ -342,11 +342,11 @@
       "area": "design",
       "title": "Enrich BA (to-prd) + architecture (trade-off/ADR) output contracts",
       "user_visible_behavior": "plan-ba-analysis emits a PRD-style contract; design-architecture emits a trade-off matrix + ADR; both have references/ and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && grep -qi prd skills/plan-ba-analysis/SKILL.md && grep -qiE \"trade-off|ADR\" skills/design-architecture/SKILL.md && bash scripts/lint-depth.sh plan-ba-analysis && bash scripts/lint-depth.sh design-architecture && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:25:09.177026+07:00: 1/1 cmds OK"
     },
     {
       "id": "F09",
