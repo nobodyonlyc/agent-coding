@@ -36,6 +36,10 @@
           },
           {
             "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/stack-decision-gate.sh\""
+          },
+          {
+            "type": "command",
             "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/test-type-coverage-gate.sh\""
           },
           {
