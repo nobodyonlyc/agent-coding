@@ -539,6 +539,18 @@
         "bash -c 'cd .harness/skills-src && for s in dev-js-ts dev-python dev-go dev-rust ship-commit-msg ship-pr-create core-explore core-explain core-fix core-file-ops opt-caveman plan-skeleton; do grep -qiE \"^description:.*use when\" skills/$s/SKILL.md && grep -qiE \"one[- ]?liner\" skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
       ],
       "notes": "verified 2026-06-22T15:21:07.088586+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F45",
+      "priority": 1,
+      "area": "quality",
+      "title": "Enforce test rigor: IT test-case tables + full E2E coverage + green-verdict gates",
+      "user_visible_behavior": "Phase 7 test skills are enforced, not just advised: test-integration mandates a test-case table (ID/Scenario/Preconditions/Steps/Input/Expected Output/Result); test-e2e requires full-system coverage via an E2E Coverage Matrix (every design-ux-flow flow -> spec); test-unit/test-regression require a green verdict line. Three PreToolUse gates on `harness verify` (test-type-coverage, it-testcase, e2e-coverage) block when a recorded verdict is not PASS, when IT lacks a test-case table, or when a UI flow is left uncovered. Gates fail open when a tier is not selected; wired into claude.settings.json; validate passes.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'grep -q it-testcase-gate .claude/settings.json && cd .harness/skills-src && for h in test-type-coverage-gate it-testcase-gate e2e-coverage-gate; do test -x hooks/$h.sh || exit 1; done && grep -qi \"Integration Test Cases\" skills/test-integration/SKILL.md && grep -qi \"E2E Coverage Matrix\" skills/test-e2e/SKILL.md && grep -q it-testcase-gate config-templates/claude.settings.json && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T20:56:13.407094+07:00: 1/1 cmds OK (manual run; harness binary not installed)"
     }
   ]
 }
