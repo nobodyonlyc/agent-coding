@@ -205,6 +205,42 @@
       "notes": "verified 2026-06-22T13:56:01.054703+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F26",
+      "priority": 1,
+      "area": "quality",
+      "title": "Skill depth standard + lint-depth + enrich review pair (reference example)",
+      "user_visible_behavior": "resources/skill-depth-standard.md defines the deep-skill bar; scripts/lint-depth.sh checks a skill meets it; check-code-review is enriched to the bar with references/ (checklist, common-issues, report-template) and passes lint-depth.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f resources/skill-depth-standard.md && test -x scripts/lint-depth.sh && test -d skills/check-code-review/references && bash scripts/lint-depth.sh check-code-review && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T14:16:08.910241+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F27",
+      "priority": 1,
+      "area": "quality",
+      "title": "Enrich bugfix with debug-diagnose 6-phase methodology",
+      "user_visible_behavior": "workflow-bugfix adopts the feedback-loop-first 6-phase structured debugging (ranked falsifiable hypotheses, gates) with references/; passes lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -qi \"feedback loop\\|hypothes\" skills/workflow-bugfix/SKILL.md && bash scripts/lint-depth.sh workflow-bugfix && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F29",
+      "priority": 1,
+      "area": "quality",
+      "title": "Add deep check-security-review skill + wire into strategy/review",
+      "user_visible_behavior": "check-security-review (deep, OWASP-style checklist + references/) exists, is referenced by check-test-strategy + check-code-review; passes lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f skills/check-security-review/SKILL.md && grep -qi security-review skills/check-test-strategy/SKILL.md && bash scripts/lint-depth.sh check-security-review && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
@@ -287,6 +323,30 @@
         "bash -c 'cd .harness/skills-src && for s in dev-js-ts dev-python dev-go dev-rust; do test -f skills/$s/SKILL.md || exit 1; done && test -f resources/conventions/rust.md && grep -q conventions/rust.md skills/dev-rust/SKILL.md && bash scripts/validate.sh'"
       ],
       "notes": "verified 2026-06-22T13:23:22.854352+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F28",
+      "priority": 2,
+      "area": "quality",
+      "title": "Enrich unit testing with TDD tracer-bullet methodology",
+      "user_visible_behavior": "test-unit adopts red-green-refactor tracer-bullet TDD (behavior-through-public-interface, anti-pattern horizontal slicing) with references/; passes lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -qiE \"tracer|red.?green|public interface\" skills/test-unit/SKILL.md && bash scripts/lint-depth.sh test-unit && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F30",
+      "priority": 2,
+      "area": "design",
+      "title": "Enrich BA (to-prd) + architecture (trade-off/ADR) output contracts",
+      "user_visible_behavior": "plan-ba-analysis emits a PRD-style contract; design-architecture emits a trade-off matrix + ADR; both have references/ and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -qi prd skills/plan-ba-analysis/SKILL.md && grep -qiE \"trade-off|ADR\" skills/design-architecture/SKILL.md && bash scripts/lint-depth.sh plan-ba-analysis && bash scripts/lint-depth.sh design-architecture && bash scripts/validate.sh'"
+      ],
+      "notes": ""
     },
     {
       "id": "F09",
