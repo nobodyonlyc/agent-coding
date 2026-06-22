@@ -330,11 +330,11 @@
       "area": "quality",
       "title": "Enrich unit testing with TDD tracer-bullet methodology",
       "user_visible_behavior": "test-unit adopts red-green-refactor tracer-bullet TDD (behavior-through-public-interface, anti-pattern horizontal slicing) with references/; passes lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && grep -qiE \"tracer|red.?green|public interface\" skills/test-unit/SKILL.md && bash scripts/lint-depth.sh test-unit && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:22:18.749391+07:00: 1/1 cmds OK"
     },
     {
       "id": "F30",
