@@ -222,11 +222,11 @@
       "area": "quality",
       "title": "Enrich bugfix with debug-diagnose 6-phase methodology",
       "user_visible_behavior": "workflow-bugfix adopts the feedback-loop-first 6-phase structured debugging (ranked falsifiable hypotheses, gates) with references/; passes lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && grep -qi \"feedback loop\\|hypothes\" skills/workflow-bugfix/SKILL.md && bash scripts/lint-depth.sh workflow-bugfix && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:19:12.923466+07:00: 1/1 cmds OK"
     },
     {
       "id": "F29",
