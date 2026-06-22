@@ -157,6 +157,18 @@
       "notes": "verified 2026-06-22T11:16:22.425008+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F21",
+      "priority": 1,
+      "area": "infra",
+      "title": "Task-state maintenance: workflow checkpoints + task-state-guard hook",
+      "user_visible_behavior": "Workflows update .harness/tasks/<id>.md at each phase boundary (expand template after start, tick [/]->[x], update Next step); a soft task-state-guard hook warns when task-state lags feature status; wired per agent.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && test -f resources/task-state.md && test -f hooks/task-state-guard.sh && bash -n hooks/task-state-guard.sh && for w in workflow-intake workflow-bootstrap workflow-feature workflow-bugfix workflow-team; do grep -qi task-state skills/$w/SKILL.md || exit 1; done && grep -q task-state-guard config-templates/claude.settings.json && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T11:55:44.880379+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
