@@ -35,10 +35,13 @@ cd agent-coding
    (pinned to the commits recorded in the index — reproducible installs).
 2. Wires skills, workflows, and hooks into every detected agent
    (Claude Code `.claude/skills`, Antigravity `.agent/workflows`, Codex path-based).
-3. Verifies the `harness` CLI binary is present and executable.
+3. **Downloads the `harness` CLI binary from GitHub Releases** for your platform when it is
+   missing (requires `curl` or `wget`), then builds the SQLite DB from `features.json`.
 
-> The `harness` binary is a prebuilt arm64 executable and is **not** tracked in git.
-> Place it at the repo root before running the backlog commands.
+> The `harness` binary is **not** tracked in git (it is gitignored). `install.sh` fetches the right
+> `harness-<os>-<arch>` asset from [`nobodyonlyc/harness`](https://github.com/nobodyonlyc/harness)
+> releases. Override with `HARNESS_VERSION=<tag>` (default `latest`) or `HARNESS_REPO=<owner/name>`;
+> for an offline/manual install, drop the prebuilt binary at the repo root before running.
 
 ### Updating submodules
 
