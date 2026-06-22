@@ -330,11 +330,11 @@
       "area": "dev",
       "title": "Vendor web-framework experts + wire dev-fe/dev-be",
       "user_visible_behavior": "15 web framework experts vendored (react/react-native/angular/vue/vue-js/nextjs/django/fastapi/spring-boot/rails/laravel/nestjs/dotnet-core/flutter/frontend-design); dev-fe and dev-be point to the expert map per stack; lint-expert-map + validate pass.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in react-expert react-native-expert angular-architect vue-expert vue-expert-js nextjs-developer django-expert fastapi-expert spring-boot-engineer rails-expert laravel-specialist nestjs-expert dotnet-core-expert flutter-expert frontend-design; do test -f skills/$s/SKILL.md || exit 1; done && grep -qi expert-skills-map skills/dev-fe/SKILL.md && grep -qi expert-skills-map skills/dev-be/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:50:36.974315+07:00: 1/1 cmds OK"
     },
     {
       "id": "F42",
