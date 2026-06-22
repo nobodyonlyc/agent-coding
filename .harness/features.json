@@ -349,6 +349,18 @@
       "notes": "verified 2026-06-22T15:57:01.123665+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F43",
+      "priority": 1,
+      "area": "optimization",
+      "title": "Caveman as a standing rule across all workflows",
+      "user_visible_behavior": "Caveman is ON by default for inter-agent prompts + subagent results in every workflow (intake/feature/bootstrap/team/bugfix all invoke opt-caveman explicitly); token-budget states the on-by-default rule; a SessionStart caveman-activate hook records caveman_mode=on and injects the directive, wired into the agent config-templates; quality carve-outs preserved; validate passes.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in workflow-intake workflow-feature workflow-bootstrap workflow-team workflow-bugfix; do grep -qi opt-caveman skills/$s/SKILL.md || exit 1; done && grep -qiE \"on by default\" resources/token-budget.md && test -x hooks/caveman-activate.sh && grep -q caveman-activate config-templates/claude.settings.json && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T16:28:32.272988+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
