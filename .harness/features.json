@@ -414,11 +414,11 @@
       "area": "planning",
       "title": "Deep: planning skills (us-backlog, plan-tasks)",
       "user_visible_behavior": "plan-us-backlog, plan-tasks meet the depth bar and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in plan-us-backlog plan-tasks; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:00:55.439824+07:00: 1/1 cmds OK"
     },
     {
       "id": "F36",
