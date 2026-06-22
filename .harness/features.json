@@ -246,11 +246,11 @@
       "area": "workflows",
       "title": "Deep: workflow orchestrators (intake/bootstrap/feature/team)",
       "user_visible_behavior": "workflow-intake, workflow-bootstrap, workflow-feature, workflow-team meet the depth bar (Use-when triggers, One-Liner, phases+Gates) and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in workflow-intake workflow-bootstrap workflow-feature workflow-team; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:40:51.747439+07:00: 1/1 cmds OK"
     },
     {
       "id": "F32",
