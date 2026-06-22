@@ -258,11 +258,11 @@
       "area": "quality",
       "title": "Deep: review/quality skills (review-loop/pr-review/refactor/qa/test-strategy)",
       "user_visible_behavior": "check-review-loop, check-pr-review, check-refactor, check-qa, check-test-strategy meet the depth bar and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in check-review-loop check-pr-review check-refactor check-qa check-test-strategy; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:47:56.464972+07:00: 1/1 cmds OK"
     },
     {
       "id": "F33",
