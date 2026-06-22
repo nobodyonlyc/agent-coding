@@ -342,11 +342,11 @@
       "area": "quality",
       "title": "Vendor test/design/debug experts + wire test/design/bugfix/review",
       "user_visible_behavior": "9 test/design/debug experts vendored (test-master/playwright/tdd-workflow/webapp-testing/api-designer/architecture-designer/code-reviewer/debugging-wizard/debug-diagnose); test-*, design-api, design-architecture, workflow-bugfix, check-code-review delegate via the map; lint-expert-map + validate pass.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in test-master playwright-expert tdd-workflow webapp-testing api-designer architecture-designer code-reviewer debugging-wizard debug-diagnose; do test -f skills/$s/SKILL.md || exit 1; done && grep -qi expert-skills-map skills/design-api/SKILL.md && grep -qi expert-skills-map skills/workflow-bugfix/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:57:01.123665+07:00: 1/1 cmds OK"
     },
     {
       "id": "F05",
