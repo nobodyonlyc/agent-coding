@@ -20,19 +20,31 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/git-guard.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/git-guard.sh\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/phase-guard.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/persona-gate.sh\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/quality-gate.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/phase-guard.sh\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/review-gate.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/quality-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/review-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/review-fix-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/task-state-guard.sh\""
           }
         ]
       }
@@ -42,15 +54,37 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/context-budget-guard.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/task-state-guard.sh\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/session-guard.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/context-budget-guard.sh\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/notify.sh\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/caveman-budget.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/step-gate.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/session-guard.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/notify.sh\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.harness/skills-src/hooks/caveman-activate.sh\""
           }
         ]
       }
