@@ -241,6 +241,66 @@
       "notes": "verified 2026-06-22T14:23:52.823446+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F31",
+      "priority": 1,
+      "area": "workflows",
+      "title": "Deep: workflow orchestrators (intake/bootstrap/feature/team)",
+      "user_visible_behavior": "workflow-intake, workflow-bootstrap, workflow-feature, workflow-team meet the depth bar (Use-when triggers, One-Liner, phases+Gates) and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in workflow-intake workflow-bootstrap workflow-feature workflow-team; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F32",
+      "priority": 1,
+      "area": "quality",
+      "title": "Deep: review/quality skills (review-loop/pr-review/refactor/qa/test-strategy)",
+      "user_visible_behavior": "check-review-loop, check-pr-review, check-refactor, check-qa, check-test-strategy meet the depth bar and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in check-review-loop check-pr-review check-refactor check-qa check-test-strategy; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F33",
+      "priority": 1,
+      "area": "design",
+      "title": "Deep: design skills (database/api/detailed/ui/ux-flow)",
+      "user_visible_behavior": "design-database, design-api, design-detailed, design-ui, design-ux-flow meet the depth bar (output contracts/examples) and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in design-database design-api design-detailed design-ui design-ux-flow; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F35",
+      "priority": 1,
+      "area": "test",
+      "title": "Deep: conditional test skills (integration/regression/e2e/performance/security)",
+      "user_visible_behavior": "test-integration, test-regression, test-e2e, test-performance, test-security meet the depth bar and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in test-integration test-regression test-e2e test-performance test-security; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F37",
+      "priority": 1,
+      "area": "delivery",
+      "title": "Deep: high-risk delivery (ship-release, ship-deploy)",
+      "user_visible_behavior": "ship-release, ship-deploy meet the depth bar (phases+Gates for irreversible actions) and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in ship-release ship-deploy; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
@@ -349,6 +409,30 @@
       "notes": "verified 2026-06-22T14:25:09.177026+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F34",
+      "priority": 2,
+      "area": "planning",
+      "title": "Deep: planning skills (us-backlog, plan-tasks)",
+      "user_visible_behavior": "plan-us-backlog, plan-tasks meet the depth bar and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in plan-us-backlog plan-tasks; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F36",
+      "priority": 2,
+      "area": "dev",
+      "title": "Deep: component dev skills (be/fe/cli/db/batch)",
+      "user_visible_behavior": "dev-be, dev-fe, dev-cli, dev-db, dev-batch meet the depth bar (Bad/Good examples) and pass lint-depth.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in dev-be dev-fe dev-cli dev-db dev-batch; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
+    },
+    {
       "id": "F09",
       "priority": 3,
       "area": "delivery",
@@ -371,6 +455,18 @@
         "bash -c 'cd .harness/skills-src && for s in core-explore core-explain core-fix core-file-ops; do test -f skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
       ],
       "notes": "verified 2026-06-22T11:44:07.664409+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F38",
+      "priority": 3,
+      "area": "core",
+      "title": "Light: triggers+One-Liner for mechanical skills (dev-langs/ship-commit/pr/core/opt/skeleton)",
+      "user_visible_behavior": "Mechanical skills get a Use-when trigger + One-Liner (not full bar): dev-js-ts/python/go/rust, ship-commit-msg, ship-pr-create, core-explore/explain/fix/file-ops, opt-caveman, plan-skeleton.",
+      "status": "not_started",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && for s in dev-js-ts dev-python dev-go dev-rust ship-commit-msg ship-pr-create core-explore core-explain core-fix core-file-ops opt-caveman plan-skeleton; do grep -qiE \"^description:.*use when\" skills/$s/SKILL.md && grep -qiE \"one[- ]?liner\" skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
+      ],
+      "notes": ""
     }
   ]
 }
