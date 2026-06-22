@@ -169,6 +169,18 @@
       "notes": "verified 2026-06-22T11:55:44.880379+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F23",
+      "priority": 1,
+      "area": "workflows",
+      "title": "Resumable bootstrap: track setup phases as an F00 feature + 2-tier phase split",
+      "user_visible_behavior": "workflow-bootstrap creates+starts a bootstrap tracking feature (F00) at pre-flight so BA/design/UI progress lives in features.json + task-state and survives interrupt (harness resume continues); doc separates setup-once (under F00) from per-US phases.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -qi \"harness add F00\" skills/workflow-bootstrap/SKILL.md && grep -qi resum skills/workflow-bootstrap/SKILL.md && grep -qi \"per-US\" skills/workflow-bootstrap/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T13:39:43.139768+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
