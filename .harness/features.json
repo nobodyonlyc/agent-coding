@@ -318,11 +318,11 @@
       "area": "dev",
       "title": "Vendor language-pro experts + wire harness language skills",
       "user_visible_behavior": "11 remaining language experts vendored (typescript/javascript/golang/rust/java/cpp/csharp/kotlin/swift/php/sql); dev-js-ts/dev-go/dev-rust delegate to their experts; all 12 in the map; lint-expert-map + validate pass.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in typescript-pro javascript-pro golang-pro rust-engineer java-architect cpp-pro csharp-developer kotlin-specialist swift-expert php-pro sql-pro; do test -f skills/$s/SKILL.md || exit 1; done && grep -qi typescript-pro skills/dev-js-ts/SKILL.md && grep -qi golang-pro skills/dev-go/SKILL.md && grep -qi rust-engineer skills/dev-rust/SKILL.md && bash scripts/lint-expert-map.sh && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:40:53.031602+07:00: 1/1 cmds OK"
     },
     {
       "id": "F41",
