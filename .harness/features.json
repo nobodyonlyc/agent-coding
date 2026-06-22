@@ -294,11 +294,11 @@
       "area": "delivery",
       "title": "Deep: high-risk delivery (ship-release, ship-deploy)",
       "user_visible_behavior": "ship-release, ship-deploy meet the depth bar (phases+Gates for irreversible actions) and pass lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && for s in ship-release ship-deploy; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T15:17:17.736828+07:00: 1/1 cmds OK"
     },
     {
       "id": "F05",
