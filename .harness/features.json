@@ -181,6 +181,18 @@
       "notes": "verified 2026-06-22T13:39:43.139768+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F24",
+      "priority": 1,
+      "area": "workflows",
+      "title": "Bootstrap Stage A as F00 child-tasks (F00-T1..T4), WIP-safe parent verify",
+      "user_visible_behavior": "workflow-bootstrap always decomposes Stage A into child-tasks F00-T1 BA, F00-T2 design, F00-T3 UI, F00-T4 plan+skeleton; children run one-at-a-time (WIP=1), parent F00 started+verified only after all children pass; plan-tasks documents the setup decomposition.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -q \"F00-T\" skills/workflow-bootstrap/SKILL.md && grep -qi child-task skills/workflow-bootstrap/SKILL.md && grep -qiE \"stage a|setup\" skills/plan-tasks/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T13:49:53.019143+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
