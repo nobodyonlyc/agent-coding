@@ -234,11 +234,11 @@
       "area": "quality",
       "title": "Add deep check-security-review skill + wire into strategy/review",
       "user_visible_behavior": "check-security-review (deep, OWASP-style checklist + references/) exists, is referenced by check-test-strategy + check-code-review; passes lint-depth.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash -c 'cd .harness/skills-src && test -f skills/check-security-review/SKILL.md && grep -qi security-review skills/check-test-strategy/SKILL.md && bash scripts/lint-depth.sh check-security-review && bash scripts/validate.sh'"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-22T14:23:52.823446+07:00: 1/1 cmds OK"
     },
     {
       "id": "F05",
