@@ -361,6 +361,18 @@
       "notes": "verified 2026-06-22T16:28:32.272988+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F44",
+      "priority": 1,
+      "area": "optimization",
+      "title": "Caveman level-selection matrix (lite/full/ultra per traffic type)",
+      "user_visible_behavior": "token-budget.md gains a Level selection matrix mapping each inter-agent traffic type to lite/full/ultra (and judgment-critical content to no-caveman/full prose); opt-caveman references it; the highest-volume skills (core-explore, dev-batch) carry a level hint; validate passes.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'cd .harness/skills-src && grep -qi \"Level selection\" resources/token-budget.md && grep -qi \"lite\" resources/token-budget.md && grep -qi \"ultra\" resources/token-budget.md && grep -qi \"full prose\" resources/token-budget.md && grep -qi level skills/opt-caveman/SKILL.md && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T18:49:07.897209+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
