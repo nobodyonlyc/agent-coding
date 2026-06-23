@@ -202,7 +202,7 @@ ensure_gitignore() {
     echo "/harness"
     echo ".claude/settings.local.json"
     echo ".claude/skills"
-    echo ".agent/"
+    echo ".agents/workflows/"
     echo "session-handoff.md"
     echo "# <<< harness-managed <<<"
   } >> "$gi"
