@@ -18,6 +18,27 @@ SQLite (`.harness/harness.db`) and synced to git-tracked `.harness/features.json
 ```
 
 <!-- COMMON_RULES_START -->
+## Entry point — ALWAYS FIRST
+
+On **any** incoming prompt that asks to build, add, change, or fix something,
+your **first action** is to run the **workflow-intake** skill — do not implement
+directly. Read and follow its canonical definition, then do exactly what it routes you to:
+
+    .harness/skills-src/skills/workflow-intake/SKILL.md
+
+Intake classifies the request (new project / feature / bugfix / legacy onboarding)
+and dispatches into the harness flow (BA → design → plan → backlog → code → verify).
+This step is mandatory because not every host auto-selects skills by description —
+Antigravity and Codex only run a workflow when it is explicitly invoked. Skipping
+intake means bypassing the harness entirely (no backlog, no plan gate, no evidence).
+
+Only pure questions / read-only inspection (no file changes) may skip intake.
+
+**Skill reference convention:** anywhere a skill is named in backticks (e.g.
+`workflow-bootstrap`, `plan-ba-analysis`, `dev-be`) or linked, it means *read and
+follow* `.harness/skills-src/skills/<name>/SKILL.md`. Never infer behavior from the
+name alone — open the file. This holds for every host (Claude Code, Antigravity, Codex).
+
 ## Hard rules (≤15)
 
 1. **WIP = 1** — only one `in_progress` feature at a time. Use `./harness start <id>`.
