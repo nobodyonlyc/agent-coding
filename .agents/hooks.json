@@ -1,0 +1,23 @@
+{
+  "_comment": "Antigravity workspace hooks (.agents/hooks.json). Wired by install.sh. Every gate runs through antigravity-hook.sh, which bridges Antigravity's stdin-JSON / stdout-decision contract to the canonical Claude-style gate scripts. Each gate self-filters on the command (e.g. 'harness verify', 'git push') and no-ops otherwise, so all may share one run_command matcher. Stop/PostToolUse advisory hooks can be added once that event shape is verified against your Antigravity build.",
+  "harness-gates": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh persona-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh phase-guard.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh task-state-guard.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh quality-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh stack-decision-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh test-type-coverage-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh it-testcase-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh e2e-coverage-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh review-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh review-fix-gate.sh" },
+          { "type": "command", "command": "bash .harness/skills-src/hooks/antigravity-hook.sh git-guard.sh" }
+        ]
+      }
+    ]
+  }
+}
