@@ -402,11 +402,11 @@
       "area": "dev",
       "title": "harness experts: deterministic skill-chain resolver",
       "user_visible_behavior": "New 'harness experts' subcommand reads the machine-readable Stack block (or --language/--component/--framework flags) and prints the exact skill chain to load (component skill + language wrapper + vendored expert) with zero LLM judgment. A weak model never infers the mapping; it reads the resolver output. Resolution is a lookup, not reasoning. CONTRACT: output is skill NAMES (e.g. dev-be, dev-go, golang-pro) — the stable cross-host reference, since all three hosts now load SKILL.md by name natively (CC Skill tool; Codex $skill-name/.agents/skills; Antigravity via skills.json registry). The relative SKILL.md path is emitted as a FALLBACK field for any host/context lacking name resolution. Name is the contract, path is the safety net.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash .harness/skills-src/scripts/test-experts-resolver.sh"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-25T11:44:11.353806+07:00: 1/1 cmds OK"
     },
     {
       "id": "F48",
