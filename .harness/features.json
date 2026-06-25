@@ -414,12 +414,12 @@
       "area": "infra",
       "title": "Hook injects + auto-logs resolved expert chain at code-phase entry",
       "user_visible_behavior": "At Phase-5 entry a hook resolves the skill chain from the machine-readable Stack block (via the F47 resolver) and does TWO things deterministically, without relying on the model: (1) INJECTS a system-reminder naming the exact skills to load (e.g. dev-be + dev-go + golang-pro for a Go backend) BY NAME — the cross-host contract now that CC/Codex/Antigravity all load SKILL.md by name; the relative path is included as a fallback. This drives selection deterministically instead of leaving it to a weak model's or host's implicit semantic match. (2) AUTO-LOGS the resolved chain to the task observability record (.harness/trace.md and/or the active task-state file) so 'which skills this task used' is captured automatically — no dependence on a weak model remembering to call 'harness trace'. Result: skill loading is both driven and observable by machinery, not model judgment.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash .harness/skills-src/scripts/test-expert-inject-hook.sh",
         "bash .harness/skills-src/scripts/test-expert-inject-log.sh"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-25T11:53:42.576374+07:00: 2/2 cmds OK"
     },
     {
       "id": "F49",
