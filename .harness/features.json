@@ -439,11 +439,11 @@
       "area": "infra",
       "title": "Cross-host skill projection: symlink CC/Codex + skills.json Antigravity",
       "user_visible_behavior": "install.sh projects the single canonical skills dir (.harness/skills-src/skills) into each host's native discovery WITHOUT content duplication: (a) CC -> symlink .claude/skills; (b) Codex -> symlink .agents/skills (Codex supports symlinked skill folders); (c) Antigravity -> generate skills.json with entries:[{path: <abs path to canonical dir>}] at ~/.gemini/config/skills.json (and/or .agents/skills.json), because Antigravity's sandbox resolves symlinks to absolute paths and its file-walker may skip symlinks, so skills.json is the robust registry. MUST verify whether Antigravity's default scan of the .agents/skills symlink (shared path with Codex) skips silently or errors hard; if it errors, split the path so the symlink serves Codex only and Antigravity sources solely via skills.json.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash .harness/skills-src/scripts/test-cross-host-projection.sh"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-25T14:48:30.817536+07:00: 1/1 cmds OK"
     },
     {
       "id": "F51",
