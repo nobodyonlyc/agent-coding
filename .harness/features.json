@@ -373,6 +373,91 @@
       "notes": "verified 2026-06-22T18:49:07.897209+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F45",
+      "priority": 1,
+      "area": "quality",
+      "title": "Enforce test rigor: IT test-case tables + full E2E coverage + green-verdict gates",
+      "user_visible_behavior": "Phase 7 test skills are enforced, not just advised: test-integration mandates a test-case table (ID/Scenario/Preconditions/Steps/Input/Expected Output/Result); test-e2e requires full-system coverage via an E2E Coverage Matrix (every design-ux-flow flow -> spec); test-unit/test-regression require a green verdict line. Three PreToolUse gates on `harness verify` (test-type-coverage, it-testcase, e2e-coverage) block when a recorded verdict is not PASS, when IT lacks a test-case table, or when a UI flow is left uncovered. Gates fail open when a tier is not selected; wired into claude.settings.json; validate passes.",
+      "status": "passing",
+      "verification": [
+        "bash -c 'grep -q it-testcase-gate .claude/settings.json && cd .harness/skills-src && for h in test-type-coverage-gate it-testcase-gate e2e-coverage-gate; do test -x hooks/$h.sh || exit 1; done && grep -qi \"Integration Test Cases\" skills/test-integration/SKILL.md && grep -qi \"E2E Coverage Matrix\" skills/test-e2e/SKILL.md && grep -q it-testcase-gate config-templates/claude.settings.json && bash scripts/validate.sh'"
+      ],
+      "notes": "verified 2026-06-22T20:56:13.407094+07:00: 1/1 cmds OK (manual run; harness binary not installed)"
+    },
+    {
+      "id": "F46",
+      "priority": 1,
+      "area": "dev",
+      "title": "Declarative skill map via frontmatter + generated expert-skills-map",
+      "user_visible_behavior": "Each expert/component/wrapper skill declares structured frontmatter (layer, language/framework, delegates_to, tier) as the SINGLE source of truth. The expert-skills-map.md table+fenced block is GENERATED from that frontmatter, not hand-maintained; lint fails if the committed map drifts from frontmatter, eliminating the duplicated source across expert-skills-map.md, stack-defaults.md and inline dev-* mentions. The 'tier' field (entry|judgment|mechanical) is the input that F51 consumes to generate per-host implicit-invocation policy, and 'delegates_to'/'layer'/'language' is what F47's resolver consumes.",
+      "status": "passing",
+      "verification": [
+        "bash .harness/skills-src/scripts/lint-expert-map.sh"
+      ],
+      "notes": "verified 2026-06-25T11:19:33.197350+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F47",
+      "priority": 1,
+      "area": "dev",
+      "title": "harness experts: deterministic skill-chain resolver",
+      "user_visible_behavior": "New 'harness experts' subcommand reads the machine-readable Stack block (or --language/--component/--framework flags) and prints the exact skill chain to load (component skill + language wrapper + vendored expert) with zero LLM judgment. A weak model never infers the mapping; it reads the resolver output. Resolution is a lookup, not reasoning. CONTRACT: output is skill NAMES (e.g. dev-be, dev-go, golang-pro) — the stable cross-host reference, since all three hosts now load SKILL.md by name natively (CC Skill tool; Codex $skill-name/.agents/skills; Antigravity via skills.json registry). The relative SKILL.md path is emitted as a FALLBACK field for any host/context lacking name resolution. Name is the contract, path is the safety net.",
+      "status": "not_started",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-experts-resolver.sh"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F48",
+      "priority": 1,
+      "area": "infra",
+      "title": "Hook injects + auto-logs resolved expert chain at code-phase entry",
+      "user_visible_behavior": "At Phase-5 entry a hook resolves the skill chain from the machine-readable Stack block (via the F47 resolver) and does TWO things deterministically, without relying on the model: (1) INJECTS a system-reminder naming the exact skills to load (e.g. dev-be + dev-go + golang-pro for a Go backend) BY NAME — the cross-host contract now that CC/Codex/Antigravity all load SKILL.md by name; the relative path is included as a fallback. This drives selection deterministically instead of leaving it to a weak model's or host's implicit semantic match. (2) AUTO-LOGS the resolved chain to the task observability record (.harness/trace.md and/or the active task-state file) so 'which skills this task used' is captured automatically — no dependence on a weak model remembering to call 'harness trace'. Result: skill loading is both driven and observable by machinery, not model judgment.",
+      "status": "not_started",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-expert-inject-hook.sh",
+        "bash .harness/skills-src/scripts/test-expert-inject-log.sh"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F49",
+      "priority": 1,
+      "area": "quality",
+      "title": "Gate audit: remove model self-evaluation from all gates",
+      "user_visible_behavior": "Audit every gate/hook so that each pass/fail decision is computed by a script reading artifacts (tests, lint, evidence, exit codes), never by the model judging its own work. Findings recorded; any soft 'model thinks it is done' gate converted to a mechanical check or flagged as an irreducible judgment chokepoint (tier=judgment) to be routed to a stronger model.",
+      "status": "not_started",
+      "verification": [
+        "bash .harness/skills-src/scripts/lint-no-self-eval-gates.sh"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F50",
+      "priority": 1,
+      "area": "infra",
+      "title": "Cross-host skill projection: symlink CC/Codex + skills.json Antigravity",
+      "user_visible_behavior": "install.sh projects the single canonical skills dir (.harness/skills-src/skills) into each host's native discovery WITHOUT content duplication: (a) CC -> symlink .claude/skills; (b) Codex -> symlink .agents/skills (Codex supports symlinked skill folders); (c) Antigravity -> generate skills.json with entries:[{path: <abs path to canonical dir>}] at ~/.gemini/config/skills.json (and/or .agents/skills.json), because Antigravity's sandbox resolves symlinks to absolute paths and its file-walker may skip symlinks, so skills.json is the robust registry. MUST verify whether Antigravity's default scan of the .agents/skills symlink (shared path with Codex) skips silently or errors hard; if it errors, split the path so the symlink serves Codex only and Antigravity sources solely via skills.json.",
+      "status": "not_started",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-cross-host-projection.sh"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "F51",
+      "priority": 1,
+      "area": "quality",
+      "title": "Suppress implicit skill auto-select for non-entry skills (weak-model footgun)",
+      "user_visible_behavior": "Both Codex and Antigravity auto-load skills by description semantic-match; surfacing all ~84 skills lets a weak model pull craft/expert skills out-of-band, bypassing the spine and gates. Constrain selection to the deterministic injected chain (F48): (a) Codex -> generate agents/openai.yaml per skill from the frontmatter 'tier' (F46): entry workflows keep implicit on; all craft/expert/component skills get allow_implicit_invocation:false, reachable only by explicit name; (b) Antigravity -> keep the spine in Workflows (explicit /name) which reference skills by name, minimizing reliance on implicit skill pickup. Only entry-tier skills are implicitly selectable on any host.",
+      "status": "not_started",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-implicit-policy.sh"
+      ],
+      "notes": ""
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
@@ -539,18 +624,6 @@
         "bash -c 'cd .harness/skills-src && for s in dev-js-ts dev-python dev-go dev-rust ship-commit-msg ship-pr-create core-explore core-explain core-fix core-file-ops opt-caveman plan-skeleton; do grep -qiE \"^description:.*use when\" skills/$s/SKILL.md && grep -qiE \"one[- ]?liner\" skills/$s/SKILL.md || exit 1; done && bash scripts/validate.sh'"
       ],
       "notes": "verified 2026-06-22T15:21:07.088586+07:00: 1/1 cmds OK"
-    },
-    {
-      "id": "F45",
-      "priority": 1,
-      "area": "quality",
-      "title": "Enforce test rigor: IT test-case tables + full E2E coverage + green-verdict gates",
-      "user_visible_behavior": "Phase 7 test skills are enforced, not just advised: test-integration mandates a test-case table (ID/Scenario/Preconditions/Steps/Input/Expected Output/Result); test-e2e requires full-system coverage via an E2E Coverage Matrix (every design-ux-flow flow -> spec); test-unit/test-regression require a green verdict line. Three PreToolUse gates on `harness verify` (test-type-coverage, it-testcase, e2e-coverage) block when a recorded verdict is not PASS, when IT lacks a test-case table, or when a UI flow is left uncovered. Gates fail open when a tier is not selected; wired into claude.settings.json; validate passes.",
-      "status": "passing",
-      "verification": [
-        "bash -c 'grep -q it-testcase-gate .claude/settings.json && cd .harness/skills-src && for h in test-type-coverage-gate it-testcase-gate e2e-coverage-gate; do test -x hooks/$h.sh || exit 1; done && grep -qi \"Integration Test Cases\" skills/test-integration/SKILL.md && grep -qi \"E2E Coverage Matrix\" skills/test-e2e/SKILL.md && grep -q it-testcase-gate config-templates/claude.settings.json && bash scripts/validate.sh'"
-      ],
-      "notes": "verified 2026-06-22T20:56:13.407094+07:00: 1/1 cmds OK (manual run; harness binary not installed)"
     }
   ]
 }
