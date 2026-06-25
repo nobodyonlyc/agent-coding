@@ -451,11 +451,11 @@
       "area": "quality",
       "title": "Suppress implicit skill auto-select for non-entry skills (weak-model footgun)",
       "user_visible_behavior": "Both Codex and Antigravity auto-load skills by description semantic-match; surfacing all ~84 skills lets a weak model pull craft/expert skills out-of-band, bypassing the spine and gates. Constrain selection to the deterministic injected chain (F48): (a) Codex -> generate agents/openai.yaml per skill from the frontmatter 'tier' (F46): entry workflows keep implicit on; all craft/expert/component skills get allow_implicit_invocation:false, reachable only by explicit name; (b) Antigravity -> keep the spine in Workflows (explicit /name) which reference skills by name, minimizing reliance on implicit skill pickup. Only entry-tier skills are implicitly selectable on any host.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash .harness/skills-src/scripts/test-implicit-policy.sh"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-25T15:19:52.041091+07:00: 1/1 cmds OK"
     },
     {
       "id": "F05",

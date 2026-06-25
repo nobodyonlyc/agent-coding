@@ -205,6 +205,7 @@ ensure_gitignore() {
     echo ".agents/workflows/"
     echo ".agents/skills"
     echo ".agents/skills.json"
+    echo ".agents/openai.yaml"
     echo "session-handoff.md"
     echo "# <<< harness-managed <<<"
   } >> "$gi"

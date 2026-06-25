@@ -18,6 +18,7 @@ session-handoff.md
 .agents/workflows/
 .agents/skills
 .agents/skills.json
+.agents/openai.yaml
 
 # Harness runtime
 .harness/trace.md
