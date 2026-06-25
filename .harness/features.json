@@ -427,11 +427,11 @@
       "area": "quality",
       "title": "Gate audit: remove model self-evaluation from all gates",
       "user_visible_behavior": "Audit every gate/hook so that each pass/fail decision is computed by a script reading artifacts (tests, lint, evidence, exit codes), never by the model judging its own work. Findings recorded; any soft 'model thinks it is done' gate converted to a mechanical check or flagged as an irreducible judgment chokepoint (tier=judgment) to be routed to a stronger model.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "bash .harness/skills-src/scripts/lint-no-self-eval-gates.sh"
       ],
-      "notes": ""
+      "notes": "verified 2026-06-25T12:00:32.133415+07:00: 1/1 cmds OK"
     },
     {
       "id": "F50",
