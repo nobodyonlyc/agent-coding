@@ -44,7 +44,7 @@ name alone — open the file. This holds for every host (Claude Code, Antigravit
 1. **WIP = 1** — only one `in_progress` feature at a time. Use `./harness start <id>`.
 2. **Verify before done** — a feature is not complete until `./harness verify <id>` passes.
 3. **Session bookend** — begin with `./harness resume`; end with `./harness session stop`.
-4. **English only** — code, commits, docs, backlog entries, comments, plan files, evidence, and agent outputs. No exceptions.
+4. **English for the engineering record** — code, commits, comments, design docs, plan files, evidence, backlog entries, and inter-agent outputs are English, always. **User-facing material is the exception**: documentation written for end users, and direct replies to the user, use the user's language.
 5. **Repo is the record** — never rely on chat history. State lives in `.harness/` and `docs/`.
 6. **No silent completion** — do not mark a feature `passing` without evidence in `docs/design-docs/<id>/evidence.md`.
 7. **Fix baseline first** — if `./init.sh` or smoke tests fail, fix before adding new work.
