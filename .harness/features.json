@@ -458,6 +458,42 @@
       "notes": "verified 2026-06-25T15:19:52.041091+07:00: 1/1 cmds OK"
     },
     {
+      "id": "F52",
+      "priority": 1,
+      "area": "dev",
+      "title": "M1 role-resolver: design-derived subagent role spec",
+      "user_visible_behavior": "Given a child-task component + the Stack block, scripts/role-resolver.sh emits a JSON role spec (role, title, language, expertise skills, phase, based_on) so a spawned subagent carries a design-derived role (e.g. Go backend -> Go Backend Tech Lead). resources/phase-roles.md maps phase->archetype.",
+      "status": "passing",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-role-resolver.sh"
+      ],
+      "notes": "verified 2026-06-26T14:38:13.268403+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F53",
+      "priority": 1,
+      "area": "quality",
+      "title": "M3 review-provenance gate: block verify without valid provenance",
+      "user_visible_behavior": "harness verify <id> is blocked unless a CLI-recorded review provenance exists whose diff-hash matches the current diff (a stale review re-opens the gate) and whose role is present. Hook wired for Claude + Antigravity. Depends on H-M2.",
+      "status": "passing",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-review-provenance-gate.sh"
+      ],
+      "notes": "verified 2026-06-26T14:42:27.894838+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F54",
+      "priority": 1,
+      "area": "workflows",
+      "title": "M4 per-phase role spawn across workflows",
+      "user_visible_behavior": "check-review-loop, check-code-review, check-security-review, check-qa and workflow-bootstrap/feature/bugfix/team spawn a design-derived role subagent at each relevant phase and record provenance via the CLI; agent-tool-mapping documents the role+provenance obligation. Depends on F52,F53,H-M2.",
+      "status": "passing",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-phase-role-spawn.sh"
+      ],
+      "notes": "verified 2026-06-26T14:48:14.434209+07:00: 1/1 cmds OK"
+    },
+    {
       "id": "F05",
       "priority": 2,
       "area": "workflows",
@@ -588,6 +624,18 @@
         "bash -c 'cd .harness/skills-src && for s in dev-be dev-fe dev-cli dev-db dev-batch; do bash scripts/lint-depth.sh \"$s\" >/dev/null || exit 1; done && bash scripts/validate.sh'"
       ],
       "notes": "verified 2026-06-22T15:10:34.749388+07:00: 1/1 cmds OK"
+    },
+    {
+      "id": "F55",
+      "priority": 2,
+      "area": "quality",
+      "title": "M5 SubagentStop provenance hook + tests + docs",
+      "user_visible_behavior": "On Claude Code a SubagentStop hook auto-records reviewer provenance (cross-host fallback stays the CLI call); shell tests cover resolver+gate end-to-end; docs (agent-tool-mapping, README) updated.",
+      "status": "passing",
+      "verification": [
+        "bash .harness/skills-src/scripts/test-subagent-provenance.sh"
+      ],
+      "notes": "verified 2026-06-26T14:51:55.293963+07:00: 1/1 cmds OK"
     },
     {
       "id": "F09",
